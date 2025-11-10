@@ -32,7 +32,7 @@ export const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 // Provider component
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, { username: "", isloggedin: true })
+  const [state, dispatch] = useReducer(authReducer, { username: "", isloggedin: false })
 
   return (
     <AuthContext.Provider value={{ state, dispatch }}>
