@@ -14,7 +14,7 @@
 
 ### 🌐 Live Demo
 
-🔗  ([`View deployed app!`](https://netlify))
+🔗  ([`View deployed app!`](https://j-trade.netlify.app))
 
 ## 🛠️ Tech Stack
 
