@@ -1,5 +1,5 @@
 //buttons used to manage the stocks as shown in the StockItems component
-import { ChevronLeftIcon, ChevronRightIcon, ArrowLongUpIcon, ArrowLongDownIcon } from "@heroicons/react/24/outline"
+import { ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/outline"
 import { useState, useEffect } from "react"
 import clsx from "clsx"; //conditional class utility
 import { sortByString } from "../../helpers/stockArraySorts";
