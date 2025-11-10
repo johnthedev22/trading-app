@@ -40,7 +40,7 @@ export default function LoginPageIcons() {
     const iconData:ComponentItem[] = [
         {
             name: 'ComputerDesktopIcon',
-            iconStyles: state.theme.length > 0 ? "z-10 shake-element text-purple-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" : "",
+            iconStyles: state.theme.length > 0 ? "z-10 shake-element text-purple-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-100" : "w-100",
             animationEnd: handleAnimationEnd
         },
         {

@@ -29,7 +29,7 @@ const StockItems = ({passedStockData, isMobile, openInMobile}: StockItemsProp) =
 
     return (
         <>
-            <StockButtons returnSortedData={handleSortChange} stockData={stockData}/>
+            <div className="mt-3"><StockButtons returnSortedData={handleSortChange} stockData={stockData}/></div>
            
                 {
                 stockData.map((item)=> {
