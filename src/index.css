@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(15px); }
+  50% { transform: translateX(-15px); }
+  75% { transform: translateX(15px); }
+  100% { transform: translateX(0); }
+}
+
+.element-initial {
+    transform: translate(0px, 0px); /* Starting position */
+    transition: transform 0.25s ease-in-out; /* Define the animation transition */
+}
+
+.element-final-red {
+    transform: translateY(-300px); /* Ending position (e.g., 100px right, 50px down) */
+}
+
+.element-final-blue {
+    transform: translate(100px,-300px); /* Ending position (e.g., 100px right, 50px down) */
+}
+
+.element-final-green {
+    transform: translate(-100px,-300px); /* Ending position (e.g., 100px right, 50px down) */
+}
+
+.shake-element {
+  animation: shake 0.5s ease-in-out; /* Apply the animation */
+  animation-duration: 0.25s;
+  animation-delay: 1s
+}
+
+.trading212-bg {
+  background-color: #323a3e8c;
+}
