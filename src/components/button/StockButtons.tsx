@@ -26,6 +26,7 @@ const StockButtons = ({stockData, returnSortedData}: StockButtonProps) => {
     }, [sortAsc]) // runs only after render, so it's safe
 
     const handleSort = (type?: string) => {
+        if(type !== undefined) alert("TODO - implement sort")
         setSortAsc(prev => !prev)
     }
 
@@ -46,7 +47,7 @@ const StockButtons = ({stockData, returnSortedData}: StockButtonProps) => {
             title: "Winners",
             id: "winners",
             show: true,
-            onClick: () => handleSort()
+            onClick: () => handleSort("winners")
         },
         {
             title: "Losers",
@@ -69,7 +70,7 @@ const StockButtons = ({stockData, returnSortedData}: StockButtonProps) => {
     ]
 
     const [translateXValue, setTranslateXValue] = useState(0)
-    const [stockButtons, setStockButtons] = useState(initialStockButtons)
+    //const [stockButtons, setStockButtons] = useState(initialStockButtons)
     const [isHovered, setIsHovered] = useState<boolean>(false)
     
     const shiftButtonsRight = (moveRight: boolean) => {
@@ -104,7 +105,7 @@ const StockButtons = ({stockData, returnSortedData}: StockButtonProps) => {
                 className="transform translate-x-[var(--tx)] will-change-transform transition-transform 
                 duration-300 ease-in-out"
             >
-                {stockButtons
+                {initialStockButtons
                 .filter((item) => item.show === true)
                 .map((item) => (
                     <button
