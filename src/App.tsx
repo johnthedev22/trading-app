@@ -10,7 +10,7 @@ const Trading = lazy(()=>import('./pages/Trading'))
 function App() {
   const { state } = useTheme()
   return (
-  <div className={`h-screen ${state.theme} overflow-hidden`}>
+  <div className={`dark h-screen ${state.theme} overflow-hidden`}>
     <BrowserRouter>      
       <Navbar/>           
       <Routes>
