@@ -1,18 +1,75 @@
-import { useState, lazy, Suspense } from "react"
+import { useState, useEffect, lazy, Suspense } from "react"
 import type { StockDataType } from "../../types/stockItem.types"
 import { useStock } from "../../hooks/useStock"
 import StockButtons from "../../components/button/StockButtons"
+import { getMultipleStocks } from "../../api/getMultipleStocks"
 
 type StockItemsProp = {
-    passedStockData: StockDataType[]
     isMobile: boolean
     openInMobile?: () => void
 }
 
 const StockItemSummary = lazy(()=>import('../../components/stocks/StockItemSummary'))
 
-const StockItems = ({passedStockData, isMobile, openInMobile}: StockItemsProp) => {
-    const [stockData, setStockData] = useState<StockDataType[]>(passedStockData)
+const initialStockData: StockDataType[] = [
+    {
+        title: "Apple",
+        tickerSymbol: "AAPL"
+    },
+    {
+        title: "BP",
+        tickerSymbol: "BP"
+    },
+    {
+        title: "IBM",
+        tickerSymbol: "IBM"
+    },
+    {
+        title: "Royal Dutch Shell",
+        tickerSymbol: "SHEL"
+    },
+    {
+        title: "Ford",
+        tickerSymbol: "F"
+    },
+    {
+        title: "Coca Cola",
+        tickerSymbol: "KO"
+    },
+    {
+        title: "Pepsi",
+        tickerSymbol: "PEP"
+    },
+    {
+        title: "Toyota",
+        tickerSymbol: "TM"
+    },
+    {
+        title: "Tesla",
+        tickerSymbol: "TSLA"
+    },
+    {
+        title: "Sony",
+        tickerSymbol: "SONY"
+    },
+    {
+        title: "NVIDIA",
+        tickerSymbol: "NVDA"
+    }
+]
+
+const StockItems = ({isMobile, openInMobile}: StockItemsProp) => {
+    const [stockData, setStockData] = useState<StockDataType[]>([])
+
+    useEffect(() => {
+        const tickers: string[]  = initialStockData.map(item => item.tickerSymbol)
+
+        getMultipleStocks(tickers)
+            .then(setStockData)
+            .catch(err => console.error("Failed to load stocks:", err))
+
+
+    }, [])
     
     const { dispatch } = useStock()
 

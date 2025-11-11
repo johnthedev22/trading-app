@@ -1,49 +1,23 @@
-import type { StockDataType } from "../types/stockItem.types"
+// src/api/getStockData.ts
+const stockCache: Record<string, any> = {}
 
-export const initialStockData: StockDataType[] = [
-    {
-        title: "Apple",
-        tickerSymbol: "AAPL"
-    },
-    {
-        title: "BP",
-        tickerSymbol: "BP"
-    },
-    {
-        title: "IBM",
-        tickerSymbol: "IBM"
-    },
-    {
-        title: "Royal Dutch Shell",
-        tickerSymbol: "SHEL"
-    },
-    {
-        title: "Ford",
-        tickerSymbol: "F"
-    },
-    {
-        title: "Coca Cola",
-        tickerSymbol: "KO"
-    },
-    {
-        title: "Pepsi",
-        tickerSymbol: "PEP"
-    },
-    {
-        title: "Toyota",
-        tickerSymbol: "TM"
-    },
-    {
-        title: "Tesla",
-        tickerSymbol: "TSLA"
-    },
-    {
-        title: "Sony",
-        tickerSymbol: "SONY"
-    },
-    {
-        title: "NVIDIA",
-        tickerSymbol: "NVDA"
-    }
-]
+export async function getStockData(symbol: string) {
+  // Normalize symbol (to avoid case mismatches)
+  const key = symbol.toUpperCase()
 
+  // ✅ 1. Return cached data if available
+  if (stockCache[key]) {
+    // console.log(`Cache hit for ${key}`)
+    return stockCache[key]
+  }
+
+  // ✅ 2. Otherwise fetch it
+  const res = await fetch(`/data/intra-${key}.json`)
+  if (!res.ok) throw new Error(`Failed to load ${key} data`)
+  const data = await res.json()
+
+  // ✅ 3. Store in memory cache
+  stockCache[key] = data
+
+  return data
+}

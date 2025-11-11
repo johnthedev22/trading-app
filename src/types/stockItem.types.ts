@@ -1,4 +1,3 @@
 export type StockDataType = {
-    title: string 
-    tickerSymbol: string
+    [key: string]: string
 }
