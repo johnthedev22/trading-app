@@ -16,7 +16,9 @@ const StockItems = ({givenStockData, isMobile, openInMobile}: StockItemsProp) =>
     const [stockData, setStockData] = useState<StockDataType[]>([])
     useEffect(()=>{
         setStockData(givenStockData)
-    },[])
+    //givenStockData wont be available on the first render, so trigger useEffect on its change
+    },[givenStockData])
+
     const handleMainChange = (stock: StockDataType) => {
         //setCurrentStock({...stock})
         dispatch({type:"SET", title: stock.title, tickerSymbol: stock.tickerSymbol})
