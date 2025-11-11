@@ -23,7 +23,7 @@ const StockItems = ({givenStockData, isMobile, openInMobile}: StockItemsProp) =>
 
         if(isMobile && typeof openInMobile === "function") openInMobile()
     }
-console.log(stockData)
+
     const handleSortChange = (sortedData: StockDataType[]) => {
         setStockData([...sortedData]) //shallow copy: React sees it as a new array reference, guaranteeing a re-render
     }
