@@ -27,7 +27,7 @@ export const StockContext = createContext<StockContextType | undefined>(undefine
 export const StockProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [state, dispatch] = useReducer(stockReducer, { 
         title: "Apple",
-        tickerSymbol: "APPL"        
+        tickerSymbol: "AAPL"        
     })
 
     return (
