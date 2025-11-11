@@ -23,7 +23,7 @@ export default function Dashboard() {
     }, [])
 
     return !isMobile ? (
-    <div className={`grid grid-cols-[33%_66%] border ${borderColor} h-full m-10`}>                
+    <div className={`overflow-y-auto max-h-[calc(100vh-100px)] grid grid-cols-[33%_66%] border ${borderColor} h-full m-10`}>                
         <div className={`grid grid-rows-1 border-r ${borderColor} p-5`}>
             <Account/>
             <StockItems givenStockData={stockData} isMobile={isMobile}/>

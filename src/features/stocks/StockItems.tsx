@@ -32,7 +32,7 @@ const StockItems = ({givenStockData, isMobile, openInMobile}: StockItemsProp) =>
 
     return (
         <>
-            <div className="mt-3"><StockButtons returnSortedData={handleSortChange} stockData={stockData}/></div>
+            <div className="sticky top-0 bg-black z-10 mt-3"><StockButtons returnSortedData={handleSortChange} stockData={stockData}/></div>
            
                 {
                 stockData.map((item)=> {
