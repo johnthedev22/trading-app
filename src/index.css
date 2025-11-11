@@ -26,10 +26,18 @@
     transform: translate(-100px,-300px); /* Ending position (e.g., 100px right, 50px down) */
 }
 
+.element-final-news {
+    transform: translate(-100px,-200px); /* Ending position (e.g., 100px right, 50px down) */
+}
+
+.element-final-globe {
+    transform: translate(100px,-200px); /* Ending position (e.g., 100px right, 50px down) */
+}
+
 .shake-element {
   animation: shake 0.5s ease-in-out; /* Apply the animation */
   animation-duration: 0.25s;
-  animation-delay: 1s
+  animation-delay: 0.5s
 }
 
 .trading212-bg {
