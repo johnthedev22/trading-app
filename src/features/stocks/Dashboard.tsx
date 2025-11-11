@@ -6,7 +6,6 @@ import useModal from '../../hooks/useModal'
 import Modal from '../../components/modal/Modal'
 
 const borderColor  = "border-gray-500"
-const stockData = null
 
 export default function Dashboard() {
     const { isMobile } = useDevice()
