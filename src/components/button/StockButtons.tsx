@@ -2,12 +2,12 @@
 import { ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/outline"
 import { useState, useEffect } from "react"
 import clsx from "clsx"; //conditional class utility
-import { sortByString } from "../../helpers/stockArraySorts";
-import type { StockDataType } from "../../types/stockItem.types";
+import { sortObjectByTicker, sortObjectByDifference } from "../../helpers/stockSorts";
+import type { StockDataTypeMap } from "../../types/stockItem.types";
 
 type StockButtonProps = {
-    stockData: StockDataType[]
-    returnSortedData: (retData: StockDataType[]) => void
+    stockData: StockDataTypeMap
+    returnSortedData: (retData: StockDataTypeMap) => void
 }
 
 type StockButtonsType = {
@@ -19,14 +19,20 @@ type StockButtonsType = {
 
 const StockButtons = ({stockData, returnSortedData}: StockButtonProps) => {
     const [sortAsc, setSortAsc] = useState<boolean>(true)
+    const [sortType, setSortType] = useState<string>("ticker")
 
     useEffect(() => {
-        const sortedData = sortByString(sortAsc, stockData)
+        const sortedData = sortType === 'ticker' ? sortObjectByTicker(sortAsc, stockData) : sortObjectByDifference(sortAsc, stockData)
+        
         returnSortedData(sortedData)
     }, [sortAsc]) // runs only after render, so it's safe
 
     const handleSort = (type?: string) => {
-        if(type !== undefined) alert("TODO - implement sort")
+        if(type === undefined) {
+            alert("Demo button")
+            return
+        }
+        setSortType(type)
         setSortAsc(prev => !prev)
     }
 
@@ -35,13 +41,13 @@ const StockButtons = ({stockData, returnSortedData}: StockButtonProps) => {
             title: "Holdings",
             id: "holdings",
             show: false, //show if we have actual holdings
-            onClick: () =>alert()
+            onClick: () =>handleSort()
         },
         {
             title: "Watch List",
             id: "watchlist",
             show: true,
-            onClick: () => handleSort()
+            onClick: () => handleSort("ticker")
         },
         {
             title: "Winners",
@@ -53,19 +59,19 @@ const StockButtons = ({stockData, returnSortedData}: StockButtonProps) => {
             title: "Losers",
             id: "losers",
             show: true,
-            onClick: () => handleSort("low")
+            onClick: () => handleSort("losers")
         },
         {
             title: "Global markets",
             id: "global",
             show: true,
-            onClick: () => alert("demo button")
+            onClick: () => handleSort()
         },
         {
             title: "Most owned",
             id: "most",
             show: true,
-            onClick: () => alert("demo button")
+            onClick: () => handleSort()
         },
     ]
 

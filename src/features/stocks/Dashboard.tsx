@@ -34,10 +34,12 @@ export default function Dashboard() {
     <div className = {`overflow-y-auto max-h-[calc(100vh-100px)] grid grid-cols-[33%_66%] border ${borderColor} h-full m-10`}>                
         <div className = {`grid grid-rows-1 border-r ${borderColor} p-5`}>
             <Account/>
-            <StockItems givenStockData = {initialStockData} 
+            {isLoading ? <div>Loading...</div> 
+            : <StockItems 
+                givenStockData = {stockData}
                 isMobile={isMobile} 
                 updateDashboard = {(stock) => setStockItem({title: stock.title, ticker: stock.ticker, prevClose: 0, close: 0})}
-            />
+            />}
         </div>
         <div className="p-5">
             {isLoading ? <div>Loading...</div> : <StockItemMain stock = {stockData[stockItem.ticker]} />}
@@ -47,11 +49,13 @@ export default function Dashboard() {
     : (
     <div className={`grid grid-cols-1 border ${borderColor} h-full p-3`}>
         <Account/>
-        <StockItems givenStockData = {initialStockData} 
-                isMobile={isMobile} 
-                updateDashboard = {(stock) => setStockItem({title: stock.title, ticker: stock.ticker, prevClose: 0, close: 0})}
-                openInMobile = {() => setIsOpen(true)}
-            />
+        {isLoading ? <div>Loading...</div> 
+        : <StockItems 
+            givenStockData = {stockData} 
+            isMobile={isMobile} 
+            updateDashboard = {(stock) => setStockItem({title: stock.title, ticker: stock.ticker, prevClose: 0, close: 0})}
+            openInMobile = {() => setIsOpen(true)}
+        />}
         <Modal title="Stock details" isOpen={isOpen} onClose={()=>setIsOpen(false)} >
             {isLoading ? <div>Loading...</div> : <StockItemMain stock = {stockData[stockItem.ticker]} />}
         </Modal>        
