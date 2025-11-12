@@ -47,7 +47,7 @@ export default function Dashboard() {
     </div>          
     )
     : (
-    <div className={`grid grid-cols-1 border ${borderColor} h-full p-3`}>
+    <div className={`overflow-y-auto max-h-[calc(100vh-100px)] grid grid-cols-1 border ${borderColor} h-full p-3`}>
         <Account/>
         {isLoading ? <div>Loading...</div> 
         : <StockItems 
