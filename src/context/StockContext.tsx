@@ -12,7 +12,7 @@ const stockReducer = (state: StockDataType, action: Action): StockDataType => {
         case "SET": return {
             ...state,
             title: action.title,
-            tickerSymbol: action.tickerSymbol
+            ticker: action.tickerSymbol
         }
     }
 }
@@ -27,7 +27,7 @@ export const StockContext = createContext<StockContextType | undefined>(undefine
 export const StockProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [state, dispatch] = useReducer(stockReducer, { 
         title: "Apple",
-        tickerSymbol: "AAPL"        
+        ticker: "AAPL"        
     })
 
     return (

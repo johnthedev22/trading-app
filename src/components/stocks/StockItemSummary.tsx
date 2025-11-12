@@ -7,7 +7,7 @@ type StockItemSummaryProp = {
 }
 
 const StockItemSummary = ({data}: StockItemSummaryProp) => {
-    const {title, tickerSymbol: symbol} = data
+    const {title, ticker: symbol} = data
     return (
         <div className="grid grid-cols-3 grid-rows-2">
             <div>img here</div>
