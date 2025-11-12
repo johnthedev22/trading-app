@@ -4,78 +4,78 @@ const initialStockData: StockDataType[] = [
     {
         title: "Apple",
         ticker: "AAPL",
-        open: "",
-        close: "",
+        prevClose: 0,
+        close: 0,
         chartData: []
     },
     {
         title: "BP",
         ticker: "BP",
-        open: "",
-        close: "",
+        prevClose: 0,
+        close: 0,
         chartData: []
     },
     {
         title: "IBM",
         ticker: "IBM",
-        open: "",
-        close: "",
+        prevClose: 0,
+        close: 0,
         chartData: []
     },
     {
         title: "Royal Dutch Shell",
         ticker: "SHEL",
-        open: "",
-        close: "",
+        prevClose: 0,
+        close: 0,
         chartData: []
     },
     {
         title: "Ford",
         ticker: "F",
-        open: "",
-        close: "",
+        prevClose: 0,
+        close: 0,
         chartData: []
     },
     {
         title: "Coca Cola",
         ticker: "KO",
-        open: "",
-        close: "",
+        prevClose: 0,
+        close: 0,
         chartData: []
     },
     {
         title: "Pepsi",
         ticker: "PEP",
-        open: "",
-        close: "",
+        prevClose: 0,
+        close: 0,
         chartData: []
     },
     {
         title: "Toyota",
         ticker: "TM",
-        open: "",
-        close: "",
+        prevClose: 0,
+        close: 0,
         chartData: []
     },
     {
         title: "Tesla",
         ticker: "TSLA",
-        open: "",
-        close: "",
+        prevClose: 0,
+        close: 0,
         chartData: []
     },
     {
         title: "Sony",
         ticker: "SONY",
-        open: "",
-        close: "",
+        prevClose: 0,
+        close: 0,
         chartData: []
     },
     {
         title: "NVIDIA",
         ticker: "NVDA",
-        open: "",
-        close: "",
+        prevClose: 0,
+        close: 0,
         chartData: []
     }
 ]

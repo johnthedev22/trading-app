@@ -1,4 +1,4 @@
 export type ChartDataPoint = {
-    open: string 
-    close: string
+    prevClose: number | string 
+    close: number | string
 }

@@ -18,7 +18,9 @@ export default function Dashboard() {
     const [stockData, setStockData] = useState<StockDataTypeMap>({})
     const [stockItem, setStockItem] = useState<StockDataType>({
         title: "Apple",
-        ticker: "AAPL"
+        ticker: "AAPL",
+        prevClose: 0, 
+        close: 0
     })
     
     useEffect(() => {
@@ -34,7 +36,7 @@ export default function Dashboard() {
             <Account/>
             <StockItems givenStockData = {initialStockData} 
                 isMobile={isMobile} 
-                updateDashboard = {(stock) => setStockItem({title: stock.title, ticker: stock.ticker})}
+                updateDashboard = {(stock) => setStockItem({title: stock.title, ticker: stock.ticker, prevClose: 0, close: 0})}
             />
         </div>
         <div className="p-5">
@@ -47,7 +49,7 @@ export default function Dashboard() {
         <Account/>
         <StockItems givenStockData = {initialStockData} 
                 isMobile={isMobile} 
-                updateDashboard = {(stock) => setStockItem({title: stock.title, ticker: stock.ticker})}
+                updateDashboard = {(stock) => setStockItem({title: stock.title, ticker: stock.ticker, prevClose: 0, close: 0})}
                 openInMobile = {() => setIsOpen(true)}
             />
         <Modal title="Stock details" isOpen={isOpen} onClose={()=>setIsOpen(false)} >
