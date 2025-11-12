@@ -1,18 +1,17 @@
 import { useState, useEffect, lazy, Suspense } from "react"
 import type { StockDataType } from "../../types/stockItem.types"
-import { useStock } from "../../hooks/useStock"
 import StockButtons from "../../components/button/StockButtons"
 
 type StockItemsProp = {
     givenStockData: StockDataType[]
     isMobile: boolean
+    updateDashboard: (stock: StockDataType) => void
     openInMobile?: () => void
 }
 
 const StockItemSummary = lazy(()=>import('../../components/stocks/StockItemSummary'))
 
-const StockItems = ({givenStockData, isMobile, openInMobile}: StockItemsProp) => {
-    const { dispatch } = useStock()
+const StockItems = ({givenStockData, isMobile, openInMobile, updateDashboard}: StockItemsProp) => {
     const [stockData, setStockData] = useState<StockDataType[]>([])
     useEffect(()=>{
         setStockData(givenStockData)
@@ -21,8 +20,7 @@ const StockItems = ({givenStockData, isMobile, openInMobile}: StockItemsProp) =>
 
     const handleMainChange = (stock: StockDataType) => {
         //setCurrentStock({...stock})
-        dispatch({type:"SET", title: stock.title, tickerSymbol: stock.tickerSymbol})
-
+        updateDashboard(stock)
         if(isMobile && typeof openInMobile === "function") openInMobile()
     }
 
@@ -32,12 +30,12 @@ const StockItems = ({givenStockData, isMobile, openInMobile}: StockItemsProp) =>
 
     return (
         <>
-            <div className="sticky top-0 bg-black z-10 mt-3"><StockButtons returnSortedData={handleSortChange} stockData={stockData}/></div>
+            <div className="sticky top-0 bg-black z-10 mt-3 border-b border-gray-500"><StockButtons returnSortedData={handleSortChange} stockData={stockData}/></div>
            
                 {
                 stockData.map((item)=> {
                     return (
-                    <Suspense key={`summary_loading_${item.tickerSymbol}`} fallback={<div>Loading...</div>}>
+                    <Suspense key={`summary_loading_${item.ticker}`} fallback={<div>Loading...</div>}>
                         <div onClick={()=>handleMainChange(item)} className="grid grid-rows hover:cursor-pointer">
                             <StockItemSummary data={item}/>
                         </div>
@@ -45,9 +43,8 @@ const StockItems = ({givenStockData, isMobile, openInMobile}: StockItemsProp) =>
                     )
                 })
                 }
-           
         </>
-        )
+    )
 }
 
 export default StockItems

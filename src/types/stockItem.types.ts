@@ -1,3 +1,11 @@
+import type { ChartDataPoint } from "./chartDataPoint.types"
+
 export type StockDataType = {
-    [key: string]: string
+  title: string
+  ticker: string
+  open?: number | string
+  close?: number | string
+  chartData?: ChartDataPoint[]
 }
+
+export type StockDataTypeMap = Record<string, StockDataType>

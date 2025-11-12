@@ -1,26 +1,20 @@
-import { useEffect, useState } from "react";
-import { useStock } from "../../hooks/useStock";
-import type { StockDataType } from "../../types/stockItem.types";
+import type { StockDataType } from "../../types/stockItem.types"
+import { chartPeriod } from "../../helpers/chartPeriod"
 
 type StockItemProps = {
-  allStockData: StockDataType[];
-};
+  stock: StockDataType
+}
 
-const StockItemMain = ({ allStockData }: StockItemProps) => {
-  const { state: data } = useStock();
-  const { title, tickerSymbol: symbol } = data;
-  const [stock, setStock] = useState<StockDataType[]>([]);
+const StockItemMain = ({ stock }: StockItemProps) => {
+  const { title, ticker, open, close } = stock
 
-  useEffect(() => {
-    const filtered = allStockData.filter(item => item.tickerSymbol.trim() === symbol.trim());
-    setStock(filtered);
-  }, [allStockData, symbol]);
+  // Example: const { doModulus, limit } = chartPeriod('1D', 15)
 
   return (
     <div className="text-white">
-      {title}, {symbol}
+     {title}, {ticker}, {open}, {close}
     </div>
-  );
-};
+  )
+}
 
-export default StockItemMain;
+export default StockItemMain

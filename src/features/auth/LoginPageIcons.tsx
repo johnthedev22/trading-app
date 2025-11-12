@@ -37,29 +37,11 @@ export default function LoginPageIcons() {
         news: "shake-element"
     })
 
-    useEffect(()=>{
-        setActionClass({
-            gbp: "element-initial",
-            usd: "element-initial",
-            eur: "element-initial",
-            news: "element-initial",
-            globe: "element-initial"
-        })
-
-        setActionShake({
-            main: "shake-element",
-            news: "shake-element"
-        })
-
-        setRepeatAnimation(false)
-    },[state.theme])
-
     useEffect(() => {
         const element = elementRef.current
         
-
         if(!element || !repeatAnimation) return  
-
+        
         setActionShake({
             main: "shake-element",
             news: "shake-element"
@@ -76,7 +58,10 @@ export default function LoginPageIcons() {
         element.addEventListener("animationstart", handleAnimationStart)
 
         //cleanup of the animation
-        return () => element.removeEventListener("animationstart", handleAnimationStart)
+        return () => {
+            setRepeatAnimation(false)
+            element.removeEventListener("animationstart", handleAnimationStart)
+        }
         
     },[repeatAnimation])
 
@@ -127,11 +112,11 @@ export default function LoginPageIcons() {
         },
         {
             name: "NewspaperIcon",
-            iconStyles: state.theme.length > 0 ? `${actionClass.news} ${actionShake.news} text-orange-500 ${classNames}` : `${actionClass.news} shake-element ${classNames}`
+            iconStyles: state.theme.length > 0 ? `${actionClass.news} ${actionShake.news} text-orange-500 ${classNames}` : `${actionClass.news} ${classNames}`
         },
         {
             name: "GlobeAmericasIcon",
-            iconStyles: state.theme.length > 0 ? `${actionClass.globe} ${actionShake.news} text-yellow-500 ${classNames}` : `${actionClass.globe} shake-element ${classNames}`
+            iconStyles: state.theme.length > 0 ? `${actionClass.globe} ${actionShake.news} text-yellow-500 ${classNames}` : `${actionClass.globe} ${classNames}`
         }
     ]
 

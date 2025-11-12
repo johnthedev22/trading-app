@@ -3,47 +3,80 @@ import type { StockDataType } from "../types/stockItem.types"
 const initialStockData: StockDataType[] = [
     {
         title: "Apple",
-        tickerSymbol: "AAPL"
+        ticker: "AAPL",
+        open: "",
+        close: "",
+        chartData: []
     },
     {
         title: "BP",
-        tickerSymbol: "BP"
+        ticker: "BP",
+        open: "",
+        close: "",
+        chartData: []
     },
     {
         title: "IBM",
-        tickerSymbol: "IBM"
+        ticker: "IBM",
+        open: "",
+        close: "",
+        chartData: []
     },
     {
         title: "Royal Dutch Shell",
-        tickerSymbol: "SHEL"
+        ticker: "SHEL",
+        open: "",
+        close: "",
+        chartData: []
     },
     {
         title: "Ford",
-        tickerSymbol: "F"
+        ticker: "F",
+        open: "",
+        close: "",
+        chartData: []
     },
     {
         title: "Coca Cola",
-        tickerSymbol: "KO"
+        ticker: "KO",
+        open: "",
+        close: "",
+        chartData: []
     },
     {
         title: "Pepsi",
-        tickerSymbol: "PEP"
+        ticker: "PEP",
+        open: "",
+        close: "",
+        chartData: []
     },
     {
         title: "Toyota",
-        tickerSymbol: "TM"
+        ticker: "TM",
+        open: "",
+        close: "",
+        chartData: []
     },
     {
         title: "Tesla",
-        tickerSymbol: "TSLA"
+        ticker: "TSLA",
+        open: "",
+        close: "",
+        chartData: []
     },
     {
         title: "Sony",
-        tickerSymbol: "SONY"
+        ticker: "SONY",
+        open: "",
+        close: "",
+        chartData: []
     },
     {
         title: "NVIDIA",
-        tickerSymbol: "NVDA"
+        ticker: "NVDA",
+        open: "",
+        close: "",
+        chartData: []
     }
 ]
 
