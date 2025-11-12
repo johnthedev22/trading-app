@@ -48,6 +48,7 @@ export default function Dashboard() {
         <StockItems givenStockData = {initialStockData} 
                 isMobile={isMobile} 
                 updateDashboard = {(stock) => setStockItem({title: stock.title, ticker: stock.ticker})}
+                openInMobile = {() => setIsOpen(true)}
             />
         <Modal title="Stock details" isOpen={isOpen} onClose={()=>setIsOpen(false)} >
             {isLoading ? <div>Loading...</div> : <StockItemMain stock = {stockData[stockItem.ticker]} />}
