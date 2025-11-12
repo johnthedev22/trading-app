@@ -10,7 +10,7 @@ const StockItemMain = ({ stock }: StockItemProps) => {
   const {arrow, color, percDifference, difference } = checkDifference(close, prevClose)
 
   return (
-    <div className="text-white">
+    <div className="sticky top-0  text-white">
      {title}, {ticker}, {close}
      <div style={{color: color}}>{arrow} {difference} ({percDifference}%)</div>
     </div>
