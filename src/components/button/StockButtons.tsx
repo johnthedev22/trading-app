@@ -4,7 +4,6 @@ import { useState, useEffect, useRef } from "react"
 import clsx from "clsx"; //conditional class utility
 import { sortObjectByTicker, sortObjectByDifference } from "../../helpers/stockSorts";
 import type { StockDataTypeMap } from "../../types/stockItem.types";
-import { IdentificationIcon } from "@heroicons/react/16/solid";
 
 type StockButtonProps = {
     stockData: StockDataTypeMap
