@@ -38,7 +38,7 @@ const StockButtons = ({stockData, theme, returnSortedData}: StockButtonProps) =>
         : sortObjectByDifference(sortAsc, stockData);
 
         returnSortedData(sortedData);
-    }, [sortAsc, sortType, stockData]);
+    }, [sortAsc, sortType]);
  // runs only after render, so it's safe
 
     const handleSort = (type?: string) => {

@@ -1,5 +1,6 @@
 // Dumb component for the user "Bank Account"
 import { CurrencyPoundIcon } from "@heroicons/react/24/outline"
+import { useTheme } from "../../hooks/useTheme"
 
 type AccountProps = {
     accountValue: string
@@ -9,14 +10,18 @@ type AccountProps = {
 }
 
 const AccountUI = ({accountValue, cash, investments, manageFunds}: AccountProps) => {
+    const { state } = useTheme()
+
+    const elementClasses:string = state.theme.length > 0 ? 'trading212-bg' : 'bg-blue-100'
+
     return (
     <div className="grid grid-cols-2 h-fit">
-        <div className="trading212-bg p-3 rounded-2xl h-full">
+        <div className={`${elementClasses} p-3 rounded-2xl h-full`}>
             <div className="text-xs">ACCOUNT VALUE</div>
             <h1 className="text-bold text-3xl">{accountValue}</h1>
         </div>
         <div className="grid grid-rows-2 text-right">
-            <div className="trading212-bg ml-3 mb-3 p-3 rounded-2xl text-left h-fit grid grid-cols-2">
+            <div className={`${elementClasses} ml-3 mb-3 p-3 rounded-2xl text-left h-fit grid grid-cols-2`}>
                 <div>
                     <div className="text-xs">CASH</div>
                     <div>{cash}</div>
@@ -31,7 +36,7 @@ const AccountUI = ({accountValue, cash, investments, manageFunds}: AccountProps)
                     </button>
                 </div>           
             </div>
-            <div className="trading212-bg ml-3 p-3 rounded-2xl text-left h-fit"><div className="text-xs">INVESTMENTS</div> {investments}</div>
+            <div className={`${elementClasses} ml-3 p-3 rounded-2xl text-left h-fit`}><div className="text-xs">INVESTMENTS</div> {investments}</div>
         </div>        
     </div>
     )
