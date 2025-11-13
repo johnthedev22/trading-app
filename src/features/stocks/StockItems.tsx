@@ -31,14 +31,17 @@ const StockItems = ({givenStockData, isMobile, theme, openInMobile, updateDashbo
 
         setStockData(sortedData)
     }
+    const isDark: boolean = theme.length === 0
+    const parentClass: string = isDark ? 'bg-white' : 'bg-black'
+    const rowHighlightClass: string = isDark ? 'bg-gray-100' : 'bg-gray-900'
     
     return (
         <>
-        <div className={`sticky top-0 ${theme.length === 0 ? 'bg-white' : 'bg-black' } z-10 mt-3 border-b border-gray-500`}><StockButtons theme = {theme} stockData = {stockData} returnSortedData = {handleSortChange}/></div>
+        <div className={`sticky top-0 ${parentClass} z-10 mt-3 border-b border-gray-500`}><StockButtons theme = {theme} stockData = {stockData} returnSortedData = {handleSortChange}/></div>
         {
             Object.keys(stockData).map(key => (
                 <Suspense key={`summary_loading_${key}`} fallback={<div>Loading...</div>}>
-                    <div onClick={()=>handleMainChange(stockData[key])} className="grid grid-rows hover:cursor-pointer">
+                    <div onClick={()=>handleMainChange(stockData[key])} className={`grid grid-rows hover:cursor-pointer dark: hover:${rowHighlightClass}`}>
                         <StockItemSummary data={stockData[key]}/>
                     </div>
                 </Suspense>
