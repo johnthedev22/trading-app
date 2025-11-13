@@ -1,5 +1,6 @@
 import type { StockDataType } from "../../types/stockItem.types"
 import { checkDifference } from "../../helpers/getPrices"
+import StockIcon from "../../components/image/StockIcon"
 
 type StockItemProps = {
   stock: StockDataType
@@ -10,10 +11,11 @@ const StockItemMain = ({ stock }: StockItemProps) => {
   const {arrow, color, percDifference, difference } = checkDifference(close, prevClose)
 
   return (
-    <div className="sticky top-0  text-white">
-     {title}, {ticker}, {close}
-     <div style={{color: color}}>{arrow} {difference} ({percDifference}%)</div>
-    </div>
+  <div className="sticky top-0  text-white">
+    <div><StockIcon ticker={ticker}/></div>
+    {title}, {ticker}, &pound;{close}
+    <div style={{color: color}}>{arrow} {difference} ({percDifference}%)</div>
+  </div>
   )
 }
 

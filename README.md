@@ -20,6 +20,7 @@
 
 - ⚡ [Vite](https://vitejs.dev/) — Fast build tool
 - ⚛️ [React](https://react.dev/) — Frontend library
+- 🔷 [TypeScript](https://www.typescriptlang.org/) - Programming language
 - 🎨 [Tailwind CSS](https://tailwindcss.com/) — Styling framework
 - 🧭 [React Router DOM](https://reactrouter.com/) — Routing
 - 🧩 [Heroicons](https://heroicons.com/) — SVG icons

@@ -98,7 +98,7 @@ const StockButtons = ({stockData, returnSortedData}: StockButtonProps) => {
         <div 
             className={
                 clsx("grid place-items-center h-full w-full z-10 transition-colors duration-200",
-                isHovered && translateXValue !=0 && "bg-orange-500")
+                isHovered && translateXValue !=0 && "dark:bg-orange-500 ")
             }>
             {isHovered && translateXValue !=0 && 
             <button className="h-full h-full hover:cursor-pointer" type="button" onClick={()=>shiftButtonsRight(true)}>
