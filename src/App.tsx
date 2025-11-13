@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>      
       <Navbar/>           
       <Routes>
-        <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/*" element={<LoginPage/>}/>
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={
             <Suspense fallback={<div>Loading...</div>}>
