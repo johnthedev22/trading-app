@@ -11,7 +11,7 @@ const StockItemMain = ({ stock }: StockItemProps) => {
   const {arrow, color, percDifference, difference } = checkDifference(close, prevClose)
 
   return (
-  <div className="sticky top-0 text-white">
+  <div className="sticky top-0 ">
     <div className="grid grid-cols-[50px_1fr]">
       <div><StockIcon ticker={ticker}/></div>
       <div className="grid grid-rows-2 text-left">

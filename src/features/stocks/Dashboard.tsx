@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
+import { useDevice } from '../../hooks/useDevice'
+import { useTheme } from '../../hooks/useTheme'
 import Account  from './Account'
 import StockItems from './StockItems'
 import StockItemMain from './StockItemMain'
-import { useDevice } from '../../hooks/useDevice'
 import useModal from '../../hooks/useModal'
 import Modal from '../../components/modal/Modal'
 import { getMultipleStocks } from "../../api/getMultipleStocks"
@@ -22,6 +23,7 @@ export default function Dashboard() {
         prevClose: 0, 
         close: 0
     })
+    const { state } = useTheme()
     
     useEffect(() => {
         getMultipleStocks(initialStockData)
@@ -37,7 +39,8 @@ export default function Dashboard() {
             {isLoading ? <div>Loading...</div> 
             : <StockItems 
                 givenStockData = {stockData}
-                isMobile={isMobile} 
+                isMobile=  {isMobile} 
+                theme = {state.theme}
                 updateDashboard = {(stock) => setStockItem({title: stock.title, ticker: stock.ticker, prevClose: 0, close: 0})}
             />}
         </div>
@@ -52,11 +55,12 @@ export default function Dashboard() {
         {isLoading ? <div>Loading...</div> 
         : <StockItems 
             givenStockData = {stockData} 
-            isMobile={isMobile} 
+            isMobile = {isMobile} 
+            theme = {state.theme}
             updateDashboard = {(stock) => setStockItem({title: stock.title, ticker: stock.ticker, prevClose: 0, close: 0})}
             openInMobile = {() => setIsOpen(true)}
         />}
-        <Modal title="Stock details" isOpen={isOpen} onClose={()=>setIsOpen(false)} >
+        <Modal title="Stock details" isOpen={isOpen} onClose={() => setIsOpen(false)} >
             {isLoading ? <div>Loading...</div> : <StockItemMain stock = {stockData[stockItem.ticker]} />}
         </Modal>        
     </div>

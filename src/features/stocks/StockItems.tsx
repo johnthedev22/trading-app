@@ -5,13 +5,14 @@ import StockButtons from "../../components/button/StockButtons"
 type StockItemsProp = {
     givenStockData: StockDataTypeMap
     isMobile: boolean
+    theme: string
     updateDashboard: (stock: StockDataType) => void
     openInMobile?: () => void
 }
 
 const StockItemSummary = lazy(()=>import('../../components/stocks/StockItemSummary'))
 
-const StockItems = ({givenStockData, isMobile, openInMobile, updateDashboard}: StockItemsProp) => {
+const StockItems = ({givenStockData, isMobile, theme, openInMobile, updateDashboard}: StockItemsProp) => {
     const [stockData, setStockData] = useState<StockDataTypeMap>({})
     useEffect(()=>{
         setStockData(givenStockData)
@@ -33,7 +34,7 @@ const StockItems = ({givenStockData, isMobile, openInMobile, updateDashboard}: S
     
     return (
         <>
-        <div className="sticky top-0 bg-black z-10 mt-3 border-b border-gray-500"><StockButtons returnSortedData={handleSortChange} stockData={stockData}/></div>
+        <div className={`sticky top-0 ${theme.length === 0 ? 'bg-white' : 'bg-black' } z-10 mt-3 border-b border-gray-500`}><StockButtons theme = {theme} stockData = {stockData} returnSortedData = {handleSortChange}/></div>
         {
             Object.keys(stockData).map(key => (
                 <Suspense key={`summary_loading_${key}`} fallback={<div>Loading...</div>}>
