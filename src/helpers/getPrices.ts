@@ -15,7 +15,7 @@ export const getClosePrices = (chartData: TimeSeries): {prevClose: number; close
 }
 
 // Helper to handle ui effects for x.close and y.close price differences
-export const checkDifference = (a: number, b: number, sortCall: boolean = false): {color: string; percDifference: number; difference: number, arrow: string} => {
+export const checkDifference = (a: number, b: number, sortCall: boolean = false): {color: string; percDifference: number; difference: number; arrow: string} => {
     const percDifference = sortCall 
     ? Number((((a - b) /b) * 100).toFixed(2)) // When sorting, we need the calling function to know if the return is negative
     : Math.abs(Number((((a - b) /b) * 100).toFixed(2)))

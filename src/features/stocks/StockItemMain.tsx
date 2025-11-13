@@ -1,6 +1,9 @@
 import type { StockDataType } from "../../types/stockItem.types"
 import { checkDifference } from "../../helpers/getPrices"
 import StockIcon from "../../components/image/StockIcon"
+import Modal from "../../components/modal/Modal"
+import { useState } from "react"
+import BuyStock from "./BuyStock"
 
 type StockItemProps = {
   stock: StockDataType
@@ -9,6 +12,7 @@ type StockItemProps = {
 const StockItemMain = ({ stock }: StockItemProps) => {
   const { title, ticker, prevClose, close } = stock
   const {arrow, color, percDifference, difference } = checkDifference(close, prevClose)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
   <div className="sticky top-0 ">
@@ -19,11 +23,32 @@ const StockItemMain = ({ stock }: StockItemProps) => {
         <div>{title}</div>
       </div>
     </div>
-    <div className="mt-5 grid grid-rows-2">
-        <div>&pound;{close}</div>
-        <div style={{color:color}}>{difference} {arrow} ({percDifference}%)</div>
+    <div className="mt-5 grid grid-rows-3">
+      <div><h1 className="text-bold text-6xl">&pound;{close}</h1></div>
+      <div style={{color:color}}>{difference} {arrow} ({percDifference}%)</div>
+      <div>
+        <button
+        onClick={()=>setIsOpen(true)}
+        className="hover:cursor-pointer w-full md:w-auto font-bold px-4 py-2 text-white bg-blue-500 rounded-full w-auto mt-2 hover:bg-blue-600"
+        >
+            Buy
+        </button>
       </div>
+    </div>
+    <Modal title = {`Buy ${title}`} isOpen = {isOpen} onClose = { ()=>setIsOpen(false)}>
+      <BuyStock 
+        ticker = {stock.ticker}
+        stockPrice = {close}
+        arrow= {arrow}
+        color = {color}
+        difference = {difference}
+        percDifference = {percDifference}
+        />
+    </Modal>
+      
+    
   </div>
+  
   )
 }
 
