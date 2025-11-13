@@ -1,5 +1,6 @@
 //Dumb component where a user can withdraw or deposit funds here 
 import { useState, type ChangeEvent } from "react"
+import { useTheme } from "../../hooks/useTheme"
 
 type FundsProps = {
     cash: string //because the number is formatted into currency
@@ -14,11 +15,17 @@ const ManageFunds = ({cash, fundAction}: FundsProps) => {
         setAmount(+e.target.value)
     }
 
+    const { state } = useTheme()
+
+    const inputFieldClasses = state.theme.length > 0 
+    ? "border-orange-500 text-white"
+    : "border-blue-500"
+
     return (
-    <div className="text-white">
+    <div className="dark:text-white">
         <div>{cash}</div>
         <div>
-            <input value={amount} onChange={handleChange}className={`border-orange-500 text-white shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline sm:w-full`} type="number" id="amount" placeholder="Enter amount in pounds"/>
+            <input value={amount} onChange={handleChange}className={`border ${inputFieldClasses} shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline sm:w-full`} type="number" id="amount" placeholder="Enter amount in pounds"/>
         </div>
         <button
         onClick={()=>fundAction(true, amount)}
