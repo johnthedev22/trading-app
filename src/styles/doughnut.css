@@ -1,0 +1,13 @@
+.half-green-donut {
+  /* Set size and make it a circle */
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  
+  /* Create the half-green, half-gray background */
+  background: conic-gradient(green 0% 50%, lightgray 50% 100%);
+  
+  /* Create the transparent center "hole" of the donut */
+  mask-image: radial-gradient(transparent 60%, black 60%);
+  -webkit-mask-image: radial-gradient(transparent 60%, black 60%);
+}

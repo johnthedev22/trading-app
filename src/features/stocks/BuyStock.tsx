@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useAccount } from "../../hooks/useAccount"
 import StockIcon from "../../components/image/StockIcon"
+import Doughnut from "../../components/stocks/Doughnut"
 
 type BuyStockProps = {
     ticker: string
@@ -21,8 +22,8 @@ const BuyStock = ({
     const { state } = useAccount()
     const [purchaseAmount, setPurchaseAmount] = useState<number>(0)
     const [purchase, setPurchase] = useState<{
-        noOfShares: number; availableFundsPerc: number; availableFunds:Number; buyAmount: number
-    }>({ noOfShares: 0, availableFundsPerc: 100, availableFunds: state.cash, buyAmount: 0 })
+        noOfShares: number; availableFundsPerc: number; availableFunds:Number; buyAmount: number; purchasePerc: number
+    }>({ noOfShares: 0, availableFundsPerc: 100, availableFunds: state.cash, buyAmount: 0, purchasePerc: 0 })
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const buyAmount:number = Number(e.target.value)
@@ -35,7 +36,8 @@ const BuyStock = ({
             noOfShares: Number(noOfShares.toFixed(4)),
             availableFundsPerc: Number((100 - difference).toFixed(0)),
             buyAmount: buyAmount,
-            availableFunds: state.cash - buyAmount
+            availableFunds: state.cash - buyAmount,
+            purchasePerc: difference
         })
     }
     return (
@@ -50,13 +52,15 @@ const BuyStock = ({
             </div>
             <div className="grid grid-rows-2">
                 <div className="grid grid-cols-2">
-                    <div className="grid grid-rows-2">
-                        <div><h1 className="text-bold text-4xl">{purchase.availableFundsPerc}%</h1></div>
-                        <div>{purchase.noOfShares} of shares</div>
-                        
-                    </div>
                     <div>
-                        <h1 className="text-bold text-4xl">&pound;{purchase.buyAmount}</h1>
+                        <div><Doughnut 
+                        availableFundsPerc = {purchase.availableFundsPerc}
+                        purchaseFundsPerc = {purchase.purchasePerc}
+                        /></div>                        
+                    </div>
+                    <div className="grid grid-rows-2">
+                        <div><h1 className="text-bold text-4xl">&pound;{purchase.buyAmount}</h1></div>
+                        <div>{purchase.noOfShares} of shares</div>
                     </div>
                 </div>
                 <div>
