@@ -1,4 +1,5 @@
 import { createContext, useReducer } from "react"
+import type { Action } from "../types/account.types"
 
 // define the state
 type State = {
@@ -7,14 +8,6 @@ type State = {
     investments: number
     userAlert?: string    
 }
-
-// define the action
-type Action = 
-    | { type: "DEPOSIT"; amount: number } 
-    | { type: "WITHDRAW"; amount: number } 
-    | { type: "BUY"; amount: number } 
-    | { type: "SELL"; amount: number }
-    | { type: "RESETALERT"; }
 
 const accountReducer = (state: State, action: Action): State => {
     let newCash = state.cash

@@ -20,7 +20,6 @@ const BuyStock = ({
     percDifference
 }: BuyStockProps) => {
     const { state, dispatch } = useAccount()
-    const [purchaseAmount, setPurchaseAmount] = useState<number>(0)
     const [purchase, setPurchase] = useState<{[key: string]: number}>({ 
         noOfShares: 0, availableFundsPerc: 100, availableFunds: state.cash, buyAmount: 0, purchasePerc: 0 
     })
@@ -37,8 +36,6 @@ const BuyStock = ({
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = Number(e.target.value);
         const diff = Math.ceil((value / state.cash) * 100);
-
-        setPurchaseAmount(value);
 
         setPurchase({
             noOfShares: Number((value / stockPrice).toFixed(4)),
@@ -58,7 +55,7 @@ const BuyStock = ({
 
 
     const handleBuy = () => {
-        if(purchaseAmount > state.cash) {
+        if(purchase.buyAmount > state.cash) {
             alert("IRL app allows overleveraging")
             return
         }
@@ -103,7 +100,7 @@ const BuyStock = ({
                         min="0"
                         max={state.cash * 1.5}
                         step="100"
-                        value={purchaseAmount}
+                        value={purchase.buyAmount}
                         className={`w-full h-2 bg-gray-200 appearance-none cursor-pointer 
                             [&::-webkit-slider-runnable-track]:bg-blue-100 
                             [&::-webkit-slider-thumb]:appearance-none 
