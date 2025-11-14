@@ -10,12 +10,7 @@
   /* Create the transparent center "hole" of the donut */
   mask-image: radial-gradient(transparent 60%, black 60%);
   -webkit-mask-image: radial-gradient(transparent 60%, black 60%);
-}
 
-.donut-wrapper {
-  position: relative;
-  width: 100px;
-  height: 100px;
 }
 
 /* Center the icon */
@@ -28,5 +23,23 @@
   height: 60px;
   color: black;    /* Or any color */
   pointer-events: none; /* optional */
+}
+
+.animate-element {
+   /* Apply the animation */
+  animation: pulse 1.0s infinite ease-in-out;
+}
+
+/* Define the keyframes for the animation */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1); /* Element expands to 110% of its size */
+  }
+  100% {
+    transform: scale(1); /* Element returns to its original size */
+  }
 }
 
