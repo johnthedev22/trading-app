@@ -22,6 +22,7 @@ const Doughnut = ({availableFundsPerc, purchaseFundsPerc}: DoughnutProps) => {
         }
         
     }, [availableFundsPerc, purchaseFundsPerc]);
+    
     return(
     <div className="half-green-donut"
         style={{
