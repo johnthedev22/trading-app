@@ -40,6 +40,8 @@ const BuyStock = ({
             purchasePerc: difference
         })
     }
+
+    const lines = '|||'
     return (
     <>
         <div className="grid grid-rows-2">
@@ -72,7 +74,27 @@ const BuyStock = ({
                         max={state.cash * 1.5}
                         step="100"
                         value={purchaseAmount}
-                        className="w-full h-1.25 bg-gray-100/25  range-lg md:range-sm appearance-none cursor-pointer accent-orange-500"
+                        className={`w-full h-2 bg-gray-200  appearance-none cursor-pointer 
+              [&::-webkit-slider-runnable-track]:bg-blue-100 
+              [&::-webkit-slider-thumb]:appearance-none 
+              [&::-webkit-slider-thumb]:w-8 
+              [&::-webkit-slider-thumb]:h-8 
+              [&::-webkit-slider-thumb]:bg-blue-500  
+              [&::-moz-range-track]:bg-blue-500 
+              [&::-moz-range-thumb]:w-8 
+              [&::-moz-range-thumb]:h-8 
+              [&::-moz-range-thumb]:bg-blue-500 
+              [&::-moz-range-thumb]:rounded-full
+              [&::-webkit-slider-thumb]:relative
+              
+    [&::-webkit-slider-thumb::before]:content-[${lines}]
+    [&::-webkit-slider-thumb::before]:relative
+    [&::-webkit-slider-thumb::before]:text-white
+    [&::-webkit-slider-thumb::before]:text-sm
+    [&::-webkit-slider-thumb::before]:left-1/2
+    [&::-webkit-slider-thumb::before]:top-1/2
+    [&::-webkit-slider-thumb::before]:-translate-x-1/2
+    [&::-webkit-slider-thumb::before]:-translate-y-1/2`}
                     />
                 </div>
             </div>

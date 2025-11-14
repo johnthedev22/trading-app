@@ -11,3 +11,22 @@
   mask-image: radial-gradient(transparent 60%, black 60%);
   -webkit-mask-image: radial-gradient(transparent 60%, black 60%);
 }
+
+.donut-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+/* Center the icon */
+.donut-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;     /* Adjust to taste */
+  height: 60px;
+  color: black;    /* Or any color */
+  pointer-events: none; /* optional */
+}
+
