@@ -3,16 +3,19 @@ import { useState, type ChangeEvent } from "react"
 import { useTheme } from "../../hooks/useTheme"
 
 type FundsProps = {
-    cash: string //because the number is formatted into currency
-    fundAction: (buy:boolean, amount: number) => void
+    cash: number
+    dispatch: any
+    depositOnly?: boolean
+    fundsToDeposit?: number
 }
 
-const ManageFunds = ({cash, fundAction}: FundsProps) => {
-    const [amount, setAmount] = useState<number>(0)
+const ManageFunds = ({cash, dispatch, depositOnly = false, fundsToDeposit = 0}: FundsProps) => {
+    const [amount, setAmount] = useState<number>(fundsToDeposit)
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         //cast the string back to a number
-        setAmount(+e.target.value)
+        //setAmount(+e.target.value)
+        setAmount(Number(e.target.value)) // removed format in the parent
     }
 
     const { state } = useTheme()
@@ -21,6 +24,20 @@ const ManageFunds = ({cash, fundAction}: FundsProps) => {
     ? "border-orange-500 text-white"
     : "border-blue-500"
 
+    //Updates the global state
+    const fundAction = (deposit: boolean) => {
+        switch(deposit) {
+            case true: dispatch({type:"DEPOSIT", amount: amount})
+                break;
+            case false: dispatch({type:"WITHDRAW", amount: amount})
+                if(amount > cash) {
+                    alert("You can only withdraw £"+cash)
+                    dispatch({type:"RESETALERT"})
+                }
+                break;
+        }
+    }
+
     return (
     <div className="dark:text-white">
         <div>{cash}</div>
@@ -28,17 +45,17 @@ const ManageFunds = ({cash, fundAction}: FundsProps) => {
             <input value={amount} onChange={handleChange}className={`border ${inputFieldClasses} shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline sm:w-full`} type="number" id="amount" placeholder="Enter amount in pounds"/>
         </div>
         <button
-        onClick={()=>fundAction(true, amount)}
+        onClick={()=>fundAction(true)}
         className="hover:cursor-pointer w-full md:w-auto font-bold px-4 py-2 text-white bg-blue-500 rounded-full w-auto mt-2 hover:bg-blue-600"
         >
             Deposit
         </button>
-        <button
-        onClick={()=>fundAction(false, amount)}
+        {!depositOnly && <button
+        onClick={()=>fundAction(false)}
         className="hover:cursor-pointer w-full md:w-auto font-bold px-4 py-2 text-white bg-red-500 rounded-full w-auto mt-2 hover:bg-red-600"
         >
         Withdraw
-        </button>
+        </button>}
     </div>
     )
 }

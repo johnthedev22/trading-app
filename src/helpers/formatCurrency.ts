@@ -4,7 +4,7 @@ type FormatParams = {
     currencyCode?: string
 }
 
-export const formatCurrency = ({amount, locale = "en-US", currencyCode = "GBP"}: FormatParams) => {
+export const formatCurrency = ({amount, locale = "en-US", currencyCode = "GBP"}: FormatParams): string => {
     const formattedCurrency: string = new Intl.NumberFormat(locale, {
         style: 'currency',
         currency: currencyCode,

@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useAccount } from "../../hooks/useAccount"
 import StockIcon from "../../components/image/StockIcon"
-import Doughnut from "../../components/stocks/Doughnut"
+import Doughnut from "./Doughnut"
 
-type BuyStockProps = {
+type BuyStockProps={
     ticker: string
     stockPrice: number
     arrow: string
@@ -19,45 +19,43 @@ const BuyStock = ({
     difference,
     percDifference
 }: BuyStockProps) => {
-    const { state } = useAccount()
+    const { state, dispatch } = useAccount()
     const [purchaseAmount, setPurchaseAmount] = useState<number>(0)
     const [purchase, setPurchase] = useState<{[key: string]: number}>({ 
         noOfShares: 0, availableFundsPerc: 100, availableFunds: state.cash, buyAmount: 0, purchasePerc: 0 
     })
     const [allowBuy, setAllowBuy] = useState<boolean>(false)
     const [buyStyles, setBuyStyles] = useState<{[key: string]: string;}>({buyAmount: 'text-blue-500', shareCount: ''})
+    const rangeRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
-        if(purchaseAmount > state.cash) {
-            setBuyStyles({
-                buyAmount: 'text-blue-300',
-                shareCount: 'text-red-500'
-            })
-        } else {
-            setBuyStyles({
-                buyAmount: 'text-blue-500',
-                shareCount: ''
-            })
+        if (rangeRef.current) {
+            handleOnChange({ target: rangeRef.current } as any);
         }
-
-        setAllowBuy(purchaseAmount > 0);
-    }, [purchaseAmount])
+    }, [state.cash]);
 
     const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const buyAmount:number = Number(e.target.value)
-        const difference:number = Math.ceil(buyAmount / state.cash * 100)
-        const noOfShares:number = buyAmount / stockPrice
+        const value = Number(e.target.value);
+        const diff = Math.ceil((value / state.cash) * 100);
 
-        setPurchaseAmount(buyAmount)
+        setPurchaseAmount(value);
 
         setPurchase({
-            noOfShares: Number(noOfShares.toFixed(4)),
-            availableFundsPerc: Number((100 - difference).toFixed(0)),
-            buyAmount: buyAmount,
-            availableFunds: state.cash - buyAmount,
-            purchasePerc: difference
-        })
-    }
+            noOfShares: Number((value / stockPrice).toFixed(4)),
+            availableFundsPerc: 100 - diff,
+            buyAmount: value,
+            availableFunds: state.cash - value,
+            purchasePerc: diff
+        });
+
+        setBuyStyles({
+            buyAmount: value > state.cash ? 'text-blue-300' : 'text-blue-500',
+            shareCount: value > state.cash ? 'text-red-500' : ''
+        });
+
+        setAllowBuy(value > 0);
+    };
+
 
     const handleBuy = () => {
         if(purchaseAmount > state.cash) {
@@ -67,9 +65,8 @@ const BuyStock = ({
 
         // Set up some sort of user array of stock portfolio
 
-    } 
-
-    const lines = '|||'
+    }
+    
     return (
     <>
         <div className="grid grid-rows-2">
@@ -78,15 +75,17 @@ const BuyStock = ({
                     <div><h1 className="text-bold text-4xl">&pound;{stockPrice}</h1></div>
                     <div style={{color: color}}>{arrow}{difference} ({percDifference}%)</div>
                 </div>
-                <div className="justify-self-end"><StockIcon ticker = {ticker} doubleSize = {true}/></div>
+                <div className="justify-self-end"><StockIcon ticker={ticker} doubleSize={true}/></div>
             </div>
             <div className="grid grid-rows-2">
                 <div className="grid grid-cols-2">
                     <div>
                         <div>
                             <Doughnut 
-                                availableFundsPerc = {purchase.availableFundsPerc}
-                                purchaseFundsPerc = {purchase.purchasePerc}
+                                globals={{ cash: state.cash, dispatch: dispatch }}
+                                availableFundsPerc={purchase.availableFundsPerc}
+                                purchaseAmountPerc={purchase.purchasePerc}
+                                purchaseAmount={purchase.buyAmount}
                             />
                         </div>                        
                     </div>
@@ -97,7 +96,8 @@ const BuyStock = ({
                 </div>
                 <div>
                     <input
-                        onChange = {handleOnChange}
+                        ref={rangeRef}
+                        onChange={handleOnChange}
                         id="volume"
                         type="range"
                         min="0"
@@ -116,7 +116,7 @@ const BuyStock = ({
                             [&::-moz-range-thumb]:bg-blue-500 
                             [&::-moz-range-thumb]:rounded-full
                             [&::-webkit-slider-thumb]:relative              
-                            [&::-webkit-slider-thumb::before]:content-[${lines}]
+                            [&::-webkit-slider-thumb::before]:content-['|||']
                             [&::-webkit-slider-thumb::before]:relative
                             [&::-webkit-slider-thumb::before]:text-white
                             [&::-webkit-slider-thumb::before]:text-sm
@@ -130,7 +130,7 @@ const BuyStock = ({
                 <div>
                     <button
         onClick={handleBuy}
-        className={`${allowBuy ? 'hover:cursor-pointer hover:bg-blue-600 bg-blue-500' : 'disabled:cursor-not-allowed disabled:bg-gray-400 bg-gray-400'}  w-full md:w-auto font-bold px-4 py-2 text-white rounded-full w-auto mt-2`}
+        className={`${allowBuy ? 'hover:cursor-pointer hover:bg-blue-600 bg-blue-500' : 'disabled:cursor-not-allowed disabled:bg-gray-400 bg-gray-400'}  w-full md:w-auto font-bold px-4 py-2 text-white rounded-full mt-2`}
         >
             Review order
         </button>

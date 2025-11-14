@@ -19,25 +19,10 @@ const Account = () => {
     const cash = formatCurrency({amount:state.cash})
     const investments = formatCurrency({amount: state.investments})
 
-    //Updates the global state
-    const handleFundAction = (buy:boolean, amount: number) => {
-        switch(buy) {
-            case true: dispatch({type:"DEPOSIT", amount: amount})
-                break;
-            case false: dispatch({type:"WITHDRAW", amount: amount})
-                if(state.userAlert) {
-                    alert(state.userAlert)
-                    dispatch({type:"RESETALERT"})
-                }
-                break;
-        }
-        
-    }
-
     return (<>
         <AccountUI manageFunds={()=>setIsOpen(true)} cash={cash} accountValue={accountValue} investments={investments}/>
         <Modal isOpen={isOpen} onClose={()=>setIsOpen(false)} title="GBP - British pound">
-            <ManageFunds fundAction={handleFundAction} cash={cash}/>
+            <ManageFunds dispatch={dispatch} cash={state.cash}/>
         </Modal>
     </>)
 }
