@@ -30,8 +30,6 @@ const StockItems = ({givenStockData, isMobile, theme, openInMobile, updateDashbo
     const isDark: boolean = theme.length === 0
     const parentClass: string = isDark ? 'bg-white' : 'bg-black'
     const rowHighlightClass: string = isDark ? 'bg-gray-100' : 'bg-gray-900'
-
-    console.log("STOCKITEMS")
     
     return (
         <>

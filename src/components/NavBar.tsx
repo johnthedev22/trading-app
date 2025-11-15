@@ -1,7 +1,7 @@
 //Tailwindcss navbar almost out the box. NavLink prop used to maintain state when routing between views
 import React, { Fragment } from "react";
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuItem, MenuItems, MenuButton, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon, HomeIcon, ChartPieIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, BellIcon, XMarkIcon, HomeIcon, ChartPieIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import DarkModeButton from "./button/DarkModeButton";
 import classNames from "../helpers/classNames";
 import { type NavLinkProps } from "react-router-dom";
@@ -43,11 +43,7 @@ const NavbarUI = ({navItems, isLoggedIn, NavLink, handleOnClick}: NavProps) => {
 
               {/* Logo + Links */}
               <div className="flex flex-1 items-center justify-center sm:justify-start">
-                <img
-                  alt="jTrade - where the wealth is shared!"
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                  className="h-8 w-auto"
-                />
+                
                 {isLoggedIn && <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     {navItems.map((item: NavItem) => {
@@ -87,11 +83,7 @@ const NavbarUI = ({navItems, isLoggedIn, NavLink, handleOnClick}: NavProps) => {
                   </button>
                 <Menu as="div" className="relative ml-3">
                   <MenuButton className="hover:cursor-pointer relative flex rounded-full">
-                    <img
-                      alt="user"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=facearea&w=256&h=256&q=80"
-                      className="h-8 w-8 rounded-full bg-gray-800"
-                    />
+                    <UserCircleIcon className="w-6 h-6"/>
                   </MenuButton>
                   <Transition
                     as={Fragment}
