@@ -6,6 +6,7 @@ import { ThemeProvider } from './context/ThemeContext.tsx'
 import { AuthProvider } from './context/AuthContext.tsx'
 import { DeviceProvider } from './context/DeviceContext.tsx'
 import { AccountProvider } from './context/AccountContext.tsx'
+import { PortfolioProvider } from './context/PortfolioContext.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,7 +14,9 @@ createRoot(document.getElementById('root')!).render(
       <ThemeProvider>
         <AuthProvider>
           <AccountProvider>
-            <App />
+            <PortfolioProvider>
+              <App />
+            </PortfolioProvider>
           </AccountProvider>          
         </AuthProvider>      
       </ThemeProvider> 

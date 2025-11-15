@@ -38,12 +38,14 @@ const StockItemMain = ({ stock }: StockItemProps) => {
     </div>
     <Modal title = {`Buy ${title}`} isOpen = {isOpen} onClose = { ()=>setIsOpen(false)}>
       <BuyStock 
+        title={title}
         ticker = {stock.ticker}
         stockPrice = {close}
         arrow= {arrow}
         color = {color}
         difference = {difference}
         percDifference = {percDifference}
+        closeOnBuy={()=>setIsOpen(false)}
         />
     </Modal>
       

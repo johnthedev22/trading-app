@@ -1,18 +1,19 @@
-// A single stock item
 import { useReducer, createContext } from "react"
 import type { StockDataType } from "../types/stockItem.types"
 
 type Action = {
+    type: "SET"
     title: string
-    ticker: string
-    prevClose: number 
-    close: number
+    tickerSymbol: string
 }
 
 const stockReducer = (state: StockDataType, action: Action): StockDataType => {
-    return {
-        ...state,
-        ...action
+    switch (action.type) {
+        case "SET": return {
+            ...state,
+            title: action.title,
+            ticker: action.tickerSymbol
+        }
     }
 }
 

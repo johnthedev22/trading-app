@@ -1,27 +1,33 @@
 import { useState, useEffect, useRef } from "react"
 import { useAccount } from "../../hooks/useAccount"
+import { usePortfolio } from "../../hooks/usePortfolio"
 import StockIcon from "../../components/image/StockIcon"
 import Doughnut from "./Doughnut"
 import { formatCurrency } from "../../helpers/formatCurrency"
 
 type BuyStockProps={
+    title: string
     ticker: string
     stockPrice: number
     arrow: string
     color: string
     difference: number
     percDifference: number
+    closeOnBuy: () => void
 }
 
 const BuyStock = ({
+    title,
     ticker,
     stockPrice,
     arrow,
     color,
     difference,
-    percDifference
+    percDifference,
+    closeOnBuy
 }: BuyStockProps) => {
     const { state, dispatch } = useAccount()
+    const { dispatch: portfolioDispatch } = usePortfolio()
     const [purchase, setPurchase] = useState<{[key: string]: number}>({ 
         noOfShares: 0, availableFundsPerc: 100, availableFunds: state.cash, buyAmount: 0, purchasePerc: 0 
     })
@@ -62,11 +68,25 @@ const BuyStock = ({
             return
         }
 
-        const investments = purchase.buyAmount + state.investments
+        //const investments = purchase.buyAmount + state.investments
+        const order = {
+            title: title,
+            ticker: ticker,
+            stockPrice: stockPrice ,
+            stockQty: purchase.noOfShares,
+            orderPrice: purchase.buyAmount
+        }
         // Set up some sort of user array of stock portfolio
+        portfolioDispatch({
+            type: "ADD_STOCK",
+            payload: { ticker, data: order }
+        });
+        
         dispatch({ type:"BUY", amount: purchase.buyAmount })
 
-        alert(`Buy complete. You have investements worth: ${formatCurrency({amount:investments})}`)
+        //alert(`Buy complete. You now have investements worth: ${formatCurrency({amount:investments})}`)
+
+        closeOnBuy()
     }
     
     return (
