@@ -1,10 +1,11 @@
 //Dumb component where a user can withdraw or deposit funds here 
 import { useState, type ChangeEvent } from "react"
 import { useTheme } from "../../hooks/useTheme"
+import type { Action } from "../../types/account.types"
 
 type FundsProps = {
     cash: number
-    dispatch: any
+    dispatch: React.Dispatch<Action>
     depositOnly?: boolean
     fundsToDeposit?: number
 }
