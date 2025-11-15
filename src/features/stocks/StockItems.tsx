@@ -1,4 +1,4 @@
-import { useState, useEffect, lazy, Suspense } from "react"
+import { useState, lazy, Suspense } from "react"
 import type { StockDataType, StockDataTypeMap } from "../../types/stockItem.types"
 import StockButtons from "../../components/button/StockButtons"
 
@@ -13,12 +13,8 @@ type StockItemsProp = {
 const StockItemSummary = lazy(()=>import('../../components/stocks/StockItemSummary'))
 
 const StockItems = ({givenStockData, isMobile, theme, openInMobile, updateDashboard}: StockItemsProp) => {
-    const [stockData, setStockData] = useState<StockDataTypeMap>({})
-    useEffect(()=>{
-        setStockData(givenStockData)
-    //givenStockData wont be available on the first render, so trigger useEffect on its change
-    },[givenStockData])
-
+    const [stockData, setStockData] = useState<StockDataTypeMap>(givenStockData)
+    
     const handleMainChange = (stock: StockDataType) => {
         //setCurrentStock({...stock})
         updateDashboard(stock)
@@ -34,6 +30,8 @@ const StockItems = ({givenStockData, isMobile, theme, openInMobile, updateDashbo
     const isDark: boolean = theme.length === 0
     const parentClass: string = isDark ? 'bg-white' : 'bg-black'
     const rowHighlightClass: string = isDark ? 'bg-gray-100' : 'bg-gray-900'
+
+    console.log("STOCKITEMS")
     
     return (
         <>

@@ -14,6 +14,8 @@ const StockItemMain = ({ stock }: StockItemProps) => {
   const {arrow, color, percDifference, difference } = checkDifference(close, prevClose)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
+  console.log('STOCKITEMMAIN')
+
   return (
   <div className="sticky top-0 ">
     <div className="grid grid-cols-[50px_1fr]">
