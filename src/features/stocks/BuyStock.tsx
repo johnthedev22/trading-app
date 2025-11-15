@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react"
 import { useAccount } from "../../hooks/useAccount"
 import StockIcon from "../../components/image/StockIcon"
 import Doughnut from "./Doughnut"
+import { formatCurrency } from "../../helpers/formatCurrency"
 
 type BuyStockProps={
     ticker: string
@@ -61,8 +62,11 @@ const BuyStock = ({
             return
         }
 
+        const investments = purchase.buyAmount + state.investments
         // Set up some sort of user array of stock portfolio
         dispatch({ type:"BUY", amount: purchase.buyAmount })
+
+        alert(`Buy complete. You have investements worth: ${formatCurrency({amount:investments})}`)
     }
     
     return (
@@ -88,7 +92,7 @@ const BuyStock = ({
                         </div>                        
                     </div>
                     <div className="grid grid-rows-2 justify-self-end">
-                        <div><h1 className={`text-bold text-4xl ${buyStyles.buyAmount}`}>&pound;{purchase.buyAmount}</h1></div>
+                        <div><h1 className={`text-bold text-4xl ${buyStyles.buyAmount}`}>{formatCurrency({amount: purchase.buyAmount})}</h1></div>
                         <div className={buyStyles.shareCount}>{purchase.noOfShares} of shares</div>
                     </div>
                 </div>
@@ -130,7 +134,7 @@ const BuyStock = ({
                     onClick={handleBuy}
                     className={`${allowBuy ? 'hover:cursor-pointer hover:bg-blue-600 bg-blue-500' : 'disabled:cursor-not-allowed disabled:bg-gray-400 bg-gray-400'}  w-full md:w-auto font-bold px-4 py-2 text-white rounded-full mt-2`}
                     >
-                        Review order
+                        Send buy order
                     </button>
                 </div>
             </div>

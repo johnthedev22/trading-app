@@ -4,6 +4,7 @@ import StockIcon from "../../components/image/StockIcon"
 import Modal from "../../components/modal/Modal"
 import { useState } from "react"
 import BuyStock from "./BuyStock"
+import { formatCurrency } from "../../helpers/formatCurrency"
 
 type StockItemProps = {
   stock: StockDataType
@@ -24,7 +25,7 @@ const StockItemMain = ({ stock }: StockItemProps) => {
       </div>
     </div>
     <div className="mt-5 grid grid-rows-3">
-      <div><h1 className="text-bold text-6xl">&pound;{close}</h1></div>
+      <div><h1 className="text-bold text-6xl">{formatCurrency({amount: close})}</h1></div>
       <div style={{color:color}}>{difference} {arrow} ({percDifference}%)</div>
       <div>
         <button

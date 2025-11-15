@@ -3,6 +3,7 @@
 import type { StockDataType } from "../../types/stockItem.types"
 import { checkDifference } from "../../helpers/getPrices"
 import StockIcon from "../image/StockIcon"
+import { formatCurrency } from "../../helpers/formatCurrency"
 
 type StockItemSummaryProp = {
     data: StockDataType
@@ -21,7 +22,7 @@ const StockItemSummary = ({data}: StockItemSummaryProp) => {
             </div>
             <div className="text-right">
                 <div>
-                     &pound;{close}
+                     {formatCurrency({amount: close})}
                 </div>
                 <div className="text-xs" style={{color: color}}>
                     {arrow}{difference} ({percDifference}%)

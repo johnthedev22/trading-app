@@ -2,6 +2,7 @@
 import { useState, type ChangeEvent } from "react"
 import { useTheme } from "../../hooks/useTheme"
 import type { Action } from "../../types/account.types"
+import { formatCurrency } from "../../helpers/formatCurrency"
 
 type FundsProps = {
     cash: number
@@ -41,7 +42,7 @@ const ManageFunds = ({cash, dispatch, depositOnly = false, fundsToDeposit = 0}: 
 
     return (
     <div className="dark:text-white">
-        <div>{cash}</div>
+        <div><h1 className="text-bold text-3xl">Cash: {formatCurrency({amount: cash})}</h1></div>
         <div>
             <input value={amount} onChange={handleChange}className={`border ${inputFieldClasses} shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline sm:w-full`} type="number" id="amount" placeholder="Enter amount in pounds"/>
         </div>
