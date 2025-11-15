@@ -11,6 +11,7 @@ type BuyStockProps={
     difference: number
     percDifference: number
 }
+
 const BuyStock = ({
     ticker,
     stockPrice,
@@ -28,13 +29,10 @@ const BuyStock = ({
     const rangeRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
-        if (rangeRef.current) {
-            handleOnChange({ target: rangeRef.current } as any);
-        }
+        calculatePurchase(purchase.buyAmount)
     }, [state.cash]);
 
-    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = Number(e.target.value);
+    const calculatePurchase = (value: number) => {
         const diff = Math.ceil((value / state.cash) * 100);
 
         setPurchase({
@@ -51,17 +49,20 @@ const BuyStock = ({
         });
 
         setAllowBuy(value > 0);
-    };
+    }
 
+    const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        calculatePurchase(Number(e.target.value));
+    }
 
     const handleBuy = () => {
         if(purchase.buyAmount > state.cash) {
-            alert("IRL app allows overleveraging")
+            alert("Additional funds required.")
             return
         }
 
         // Set up some sort of user array of stock portfolio
-
+        dispatch({ type:"BUY", amount: purchase.buyAmount })
     }
     
     return (
@@ -126,11 +127,11 @@ const BuyStock = ({
                 </div>
                 <div>
                     <button
-        onClick={handleBuy}
-        className={`${allowBuy ? 'hover:cursor-pointer hover:bg-blue-600 bg-blue-500' : 'disabled:cursor-not-allowed disabled:bg-gray-400 bg-gray-400'}  w-full md:w-auto font-bold px-4 py-2 text-white rounded-full mt-2`}
-        >
-            Review order
-        </button>
+                    onClick={handleBuy}
+                    className={`${allowBuy ? 'hover:cursor-pointer hover:bg-blue-600 bg-blue-500' : 'disabled:cursor-not-allowed disabled:bg-gray-400 bg-gray-400'}  w-full md:w-auto font-bold px-4 py-2 text-white rounded-full mt-2`}
+                    >
+                        Review order
+                    </button>
                 </div>
             </div>
         </div>
