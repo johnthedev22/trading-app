@@ -27,7 +27,7 @@ const BuyStock = ({
     closeOnBuy
 }: BuyStockProps) => {
     const { state, dispatch } = useAccount()
-    const { dispatch: portfolioDispatch } = usePortfolio()
+    const { state: portfolioState, dispatch: portfolioDispatch } = usePortfolio()
     const [purchase, setPurchase] = useState<{[key: string]: number}>({ 
         noOfShares: 0, availableFundsPerc: 100, availableFunds: state.cash, buyAmount: 0, purchasePerc: 0 
     })
@@ -68,8 +68,14 @@ const BuyStock = ({
             return
         }
 
+        const existingOrders = portfolioState[ticker];
+        const nextOrderID = existingOrders 
+        ? Object.keys(existingOrders).length + 1 
+        : 1;
+        
         //const investments = purchase.buyAmount + state.investments
         const order = {
+            orderID: nextOrderID,
             title: title,
             ticker: ticker,
             stockPrice: stockPrice ,
@@ -79,7 +85,7 @@ const BuyStock = ({
         // Set up some sort of user array of stock portfolio
         portfolioDispatch({
             type: "ADD_STOCK",
-            payload: { ticker, data: order }
+            payload: { ticker, orderID: nextOrderID, data: order }
         });
         
         dispatch({ type:"BUY", amount: purchase.buyAmount })

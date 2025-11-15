@@ -1,10 +1,10 @@
 import { useReducer, createContext } from "react"
-import type { PortfolioState } from "../types/stockItem.types"
+import type { PortfolioState, OrderData } from "../types/stockItem.types"
 
 // Define the possible actions
 type Action =
-  | { type: "ADD_STOCK"; payload: { ticker: string; data: PortfolioState[string] } }
-  | { type: "UPDATE_STOCK"; payload: { ticker: string; data: Partial<PortfolioState[string]> } }
+  | { type: "ADD_STOCK"; payload: { orderID: number; ticker: string; data: OrderData } }
+  | { type: "UPDATE_STOCK"; payload: { orderID: string; ticker: string; data: Partial<PortfolioState[string]> } }
   | { type: "REMOVE_STOCK"; payload: { ticker: string } };
 
 
@@ -13,22 +13,28 @@ const portfolioReducer = (state: PortfolioState, action: Action): PortfolioState
         case "ADD_STOCK":
             return {
                 ...state,
-                [action.payload.ticker]: action.payload.data
+                [action.payload.ticker]: {
+                    ...(state[action.payload.ticker] ?? {}),
+                    [action.payload.orderID]: action.payload.data
+                }
             };
 
-        case "UPDATE_STOCK":
+        /*case "UPDATE_STOCK":
             return {
                 ...state,
                 [action.payload.ticker]: {
-                    ...state[action.payload.ticker],
-                    ...action.payload.data,
-                },
+                    ...(state[action.payload.ticker] ?? {}),
+                    [action.payload.orderID]: {
+                        ...(state[action.payload.ticker]?.[action.payload.orderID] ?? {}),
+                        ...action.payload.data
+                    }
+                }
             };
 
         case "REMOVE_STOCK":
             const newState = { ...state };
             delete newState[action.payload.ticker];
-            return newState;
+            return newState;*/
 
         default:
             return state;

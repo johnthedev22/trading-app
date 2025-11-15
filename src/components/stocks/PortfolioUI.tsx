@@ -4,15 +4,22 @@ const PortfolioUI = () => {
     return(
         <>
             <ul>
-               {Object.entries(state).map(([ticker, stock]) => (
-                    <div key={ticker}>
-                        <h3>{stock.title} ({stock.ticker})</h3>
-                        <p>Price: ${stock.stockPrice}</p>
-                        <p>Shares: {stock.stockQty}</p>
-                        <p>Invested: ${stock.orderPrice}</p>
+            {Object.entries(state).map(([ticker, orders]) => (
+                <li key={ticker}>
+                <h2>{ticker}</h2>
+
+                {Object.entries(orders).map(([orderID, order]) => (
+                    <div key={orderID}>
+                    <h3>{order.title} (Order #{orderID})</h3>
+                    <p>Price: ${order.stockPrice}</p>
+                    <p>Shares: {order.stockQty}</p>
+                    <p>Invested: ${order.orderPrice}</p>
                     </div>
                 ))}
+                </li>
+            ))}
             </ul>
+
         </>
     )
 }

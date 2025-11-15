@@ -1,12 +1,17 @@
 import type { ChartDataPoint } from "./chartDataPoint.types"
 
+export type OrderData = {
+  orderID: number
+  title: string
+  ticker: string
+  stockPrice: number 
+  stockQty: number
+  orderPrice: number
+}
+
 export type PortfolioState = {
     [ticker: string]: { // eg: "AAPL"
-        title: string
-        ticker: string
-        stockPrice: number 
-        stockQty: number
-        orderPrice: number
+      [orderID: number]: OrderData
     };
 };
 
