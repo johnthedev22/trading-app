@@ -57,7 +57,7 @@ export default function Dashboard() {
   )
 
   const renderStockMain = (
-    <StockItemMain stock={stockData[selectedStock.ticker]} />
+    <StockItemMain stock={stockData[selectedStock.ticker]} {...(isMobile && { closeInMobile: () => {setIsOpen(false)} })} />
   )
 
   if (isMobile) {

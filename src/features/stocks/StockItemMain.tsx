@@ -8,12 +8,20 @@ import { formatCurrency } from "../../helpers/formatCurrency"
 
 type StockItemProps = {
   stock: StockDataType
+  closeInMobile?: () => void
 }
 
-const StockItemMain = ({ stock }: StockItemProps) => {
+const StockItemMain = ({ stock, closeInMobile }: StockItemProps) => {
   const { title, ticker, prevClose, close } = stock
   const {arrow, color, percDifference, difference } = checkDifference(close, prevClose)
   const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const handleOnClose = () => {
+    setIsOpen(false)
+
+    // if mobile then close the main buy modal
+    if(typeof closeInMobile === "function") closeInMobile()
+  }
 
   return (
   <div className="sticky top-0 ">
@@ -36,7 +44,7 @@ const StockItemMain = ({ stock }: StockItemProps) => {
         </button>
       </div>
     </div>
-    <Modal title = {`Buy ${title}`} isOpen = {isOpen} onClose = { ()=>setIsOpen(false)}>
+    <Modal title = {`Buy ${title}`} isOpen = {isOpen} onClose = {handleOnClose} >
       <BuyStock 
         title={title}
         ticker = {stock.ticker}
@@ -45,7 +53,7 @@ const StockItemMain = ({ stock }: StockItemProps) => {
         color = {color}
         difference = {difference}
         percDifference = {percDifference}
-        closeOnBuy={()=>setIsOpen(false)}
+        closeOnBuy={handleOnClose}
         />
     </Modal>
       
