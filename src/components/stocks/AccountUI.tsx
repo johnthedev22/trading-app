@@ -29,7 +29,7 @@ const AccountUI = ({accountValue, cash, investments, handleOnClick}: AccountProp
                     </div>
                     <div className="text-left text-xs font-bold">
                         <div style={{color: 'green'}}>CASH</div>
-                        <div  style={{color: 'lightgray'}}>INVESTMENTS</div>
+                        <div  style={{color: 'lightgray'}}>HOLDINGS</div>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@ const AccountUI = ({accountValue, cash, investments, handleOnClick}: AccountProp
             </div>
             <div className={`${elementClasses} ml-3 p-3 rounded-2xl text-left h-fit grid grid-cols-2`}>
                 <div>
-                    <div className="text-xs">INVESTMENTS</div> 
+                    <div className="text-xs">HOLDINGS</div> 
                     <div>{investments}</div> 
                 </div>
                 <div className="flex justify-self-end">

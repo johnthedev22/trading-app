@@ -32,7 +32,7 @@ const Account = () => {
             cash={cash} 
             accountValue={accountValue} 
             investments={investments} />
-        <Modal isOpen={isOpen} onClose={()=>{setIsOpen(false)}} title="GBP - British pound">
+        <Modal isOpen={isOpen} onClose={()=>{setIsOpen(false)}} title={report === "funds" ? "GBP - British pound": "Holdings"}>
             {report === 'funds' 
             ? <ManageFunds closeOnAction={()=>{setIsOpen(false)}} dispatch={accountDispatch} cash={state.cash}/>
             : <PortfolioUI portfolioData={portfolioData} portfolioDispatch={portfolioDispatch} accountDispatch={accountDispatch}/>
