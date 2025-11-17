@@ -2,6 +2,7 @@
 
 import { formatCurrency } from "../../helpers/formatCurrency";
 import { useAccount } from "../../hooks/useAccount";
+import { usePortfolio } from "../../hooks/usePortfolio";
 import AccountUI from "../../components/stocks/AccountUI";
 import Modal from "../../components/modal/Modal";
 import ManageFunds from "../../components/stocks/ManageFunds";
@@ -14,7 +15,8 @@ const Account = () => {
     const { isOpen, setIsOpen } = useModal(false)
 
     //global states
-    const { state, dispatch } = useAccount()
+    const { state, dispatch: accountDispatch } = useAccount()
+    const { state: portfolioData, dispatch: portfolioDispatch } = usePortfolio()
 
     //chosen report
     const [report, setReport] = useState<string>("funds")
@@ -32,8 +34,8 @@ const Account = () => {
             investments={investments} />
         <Modal isOpen={isOpen} onClose={()=>{setIsOpen(false)}} title="GBP - British pound">
             {report === 'funds' 
-            ? <ManageFunds closeOnAction={()=>{setIsOpen(false)}} dispatch={dispatch} cash={state.cash}/>
-            : <PortfolioUI/>
+            ? <ManageFunds closeOnAction={()=>{setIsOpen(false)}} dispatch={accountDispatch} cash={state.cash}/>
+            : <PortfolioUI portfolioData={portfolioData} portfolioDispatch={portfolioDispatch} accountDispatch={accountDispatch}/>
             }
         </Modal>
     </>)

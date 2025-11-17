@@ -1,11 +1,6 @@
 import { useReducer, createContext } from "react"
-import type { PortfolioState, OrderData } from "../types/stockItem.types"
-
-// Define the possible actions
-type Action =
-  | { type: "ADD_STOCK"; payload: { orderID: number; ticker: string; data: OrderData } }
-  | { type: "UPDATE_STOCK"; payload: { orderID: string; ticker: string; data: Partial<PortfolioState[string]> } }
-  | { type: "REMOVE_STOCK"; payload: { ticker: string } };
+import type { PortfolioState } from "../types/stockItem.types"
+import type { Action } from "../types/portfolioAction.types";
 
 
 const portfolioReducer = (state: PortfolioState, action: Action): PortfolioState => {
@@ -29,13 +24,12 @@ const portfolioReducer = (state: PortfolioState, action: Action): PortfolioState
                         ...action.payload.data
                     }
                 }
-            };
+            };*/
 
         case "REMOVE_STOCK":
             const newState = { ...state };
-            delete newState[action.payload.ticker];
-            return newState;*/
-
+            delete newState[action.payload.ticker][action.payload.orderID];
+            return newState;
         default:
             return state;
     }

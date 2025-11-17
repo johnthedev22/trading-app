@@ -1,26 +1,25 @@
-import { usePortfolio } from "../../hooks/usePortfolio"
-const PortfolioUI = () => {
-    const { state } = usePortfolio()
+import OrderItemSummary from "./OrderItemSummary"
+import type { Action } from "../../types/account.types"
+import type { PortfolioState } from "../../types/stockItem.types"
+import type { Action as PortfolioAction } from "../../types/portfolioAction.types"
+
+type PortfolioProps = {
+    portfolioData: PortfolioState
+    portfolioDispatch: React.Dispatch<PortfolioAction>
+    accountDispatch: React.Dispatch<Action>
+}
+
+const PortfolioUI = ({ portfolioData, portfolioDispatch, accountDispatch }: PortfolioProps ) => {
     return(
-        <>
-            <ul>
-            {Object.entries(state).map(([ticker, orders]) => (
-                <li key={ticker}>
-                <h2>{ticker}</h2>
-
-                {Object.entries(orders).map(([orderID, order]) => (
-                    <div key={orderID}>
-                    <h3>{order.title} (Order #{orderID})</h3>
-                    <p>Price: ${order.stockPrice}</p>
-                    <p>Shares: {order.stockQty}</p>
-                    <p>Invested: ${order.orderPrice}</p>
-                    </div>
-                ))}
-                </li>
-            ))}
-            </ul>
-
+    <>
+    {Object.entries(portfolioData).map(([ticker, orders]) => (
+        <>{Object.entries(orders).map(([orderID, order]) => (
+            <OrderItemSummary key={`${ticker}_${orderID}`} data={order} accountDispatch={accountDispatch} portfolioDispatch={portfolioDispatch} />
+        ))}
         </>
+        
+    ))}
+    </>
     )
 }
 
