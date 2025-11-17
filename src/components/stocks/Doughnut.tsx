@@ -35,7 +35,7 @@ const DoughnutUI = ({globals, throb, backgroundStyle, purchaseAmount}: DoughnutP
         </button>
     
         <Modal title = "Deposit funds" isOpen={isOpen} onClose={()=>setIsOpen(false)}>
-            <ManageFunds closeOnAction={()=>setIsOpen(false)} cash={globals.cash} depositOnly={true} fundsToDeposit={purchaseAmount} dispatch={globals.dispatch}/>
+            <ManageFunds closeOnAction={()=>setIsOpen(false)} cash={globals.cash} depositOnly={true} fundsToDeposit={purchaseAmount - globals.cash} dispatch={globals.dispatch}/>
         </Modal>
     </> 
     )

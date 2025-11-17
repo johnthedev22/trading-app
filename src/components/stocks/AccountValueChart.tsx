@@ -9,8 +9,8 @@ const AccountValueChart = () => {
     :   state.investments === state.accountValue 
     ?   {  background: `conic-gradient( lightgray 0% ${state.cash / state.accountValue * 100}%  )` }
     : { background: `conic-gradient( 
-            green ${state.cash / state.accountValue * 100}%, 
-            lightgray ${state.investments / state.accountValue * 100}% 
+            green 0% ${state.cash / state.accountValue * 100}%, 
+            lightgray ${state.cash / state.accountValue * 100}% ${state.investments / state.accountValue * 100}% 
         )` }
 
     return(
