@@ -29,7 +29,7 @@ const OrderItemSummary = ({data, accountDispatch, portfolioDispatch}: StockItemS
             </div>
             <div className="text-right">
                 <div>
-                    Order #:{orderID}
+                    Order# {orderID}
                 </div>
                 <div className="text-xs">
                     {formatCurrency({amount:orderPrice})}
