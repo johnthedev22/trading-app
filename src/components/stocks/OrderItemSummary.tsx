@@ -29,13 +29,13 @@ const OrderItemSummary = ({data, accountDispatch, portfolioDispatch}: StockItemS
             </div>
             <div className="text-right">
                 <div>
-                    Order: {orderID}
+                    Order #:{orderID}
                 </div>
                 <div className="text-xs">
                     {formatCurrency({amount:orderPrice})}
                 </div>
             </div>
-            <div className="flex justify-self-end">
+            <div className="flex items-center justify-self-end">
                 <button
                     onClick={handleSell}
                     className={`hover:cursor-pointer hover:bg-blue-600 bg-blue-500 w-full md:w-auto font-bold px-4 py-2 text-white rounded-full mt-2`}
