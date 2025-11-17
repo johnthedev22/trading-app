@@ -1,6 +1,7 @@
 // Dumb component for the user "Bank Account"
 import { CurrencyPoundIcon, ArrowTrendingUpIcon } from "@heroicons/react/24/outline"
 import { useTheme } from "../../hooks/useTheme"
+import AccountValueChart from "./AccountValueChart"
 
 type AccountProps = {
     accountValue: string
@@ -17,8 +18,22 @@ const AccountUI = ({accountValue, cash, investments, handleOnClick}: AccountProp
     return (
     <div className="grid grid-cols-2 h-fit">
         <div className={`${elementClasses} p-3 rounded-2xl h-full`}>
-            <div className="text-xs">ACCOUNT VALUE</div>
-            <h1 className="text-bold text-3xl">{accountValue}</h1>
+            <div className="grid grid-rows-2">
+                <div>
+                   <div className="text-xs">ACCOUNT VALUE</div>
+                    <h1 className="text-bold text-3xl">{accountValue}</h1> 
+                </div>
+                <div className="grid grid-cols-2 mt-3">
+                    <div className="text-xs flex items-center justify-center">
+                        <AccountValueChart />
+                    </div>
+                    <div className="text-left text-xs font-bold">
+                        <div style={{color: 'green'}}>CASH</div>
+                        <div  style={{color: 'lightgray'}}>INVESTMENTS</div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
         <div className="grid grid-rows-2 text-right">
             <div className={`${elementClasses} ml-3 mb-3 p-3 rounded-2xl text-left h-fit grid grid-cols-2`}>

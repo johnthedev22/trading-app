@@ -83,7 +83,7 @@ const NavbarUI = ({navItems, isLoggedIn, NavLink, handleOnClick}: NavProps) => {
                   </button>
                 <Menu as="div" className="relative ml-3">
                   <MenuButton className="hover:cursor-pointer relative flex rounded-full">
-                    <UserCircleIcon className="w-6 h-6"/>
+                    <UserCircleIcon className="w-6 h-6 text-gray-400 hover:text-white"/>
                   </MenuButton>
                   <Transition
                     as={Fragment}
