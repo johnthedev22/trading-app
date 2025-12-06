@@ -28,7 +28,12 @@
 
 ---
 
-## 🚀 Installation
+## 🚀 Run with Docker (Recommended)
+ ```bash```
+ docker build -t trading-app
+ docker run -p 8080:80 trading-app
+
+## 🛠️ Run locally (without Docker)
 
 ### 1️⃣ Create a new Vite project
 ```bash```
